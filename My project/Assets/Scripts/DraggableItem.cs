@@ -7,10 +7,19 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
 
+    public MapHandler mapHandler;
+    public ItemInformation myItemInfo;
+
+
     void Awake()
     {
         image = GetComponent<Image>();  
     }
+    void Start()
+    {
+        myItemInfo = this.GetComponent<ItemInformation>();
+        mapHandler = MapHandler.Instance;
+    }    
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -31,6 +40,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Debug.Log("End Drag");
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+
+        if (myItemInfo.getItemLabel() == "MapPart")
+        {
+            mapHandler.ResetMap();
+        }
     }
 
 

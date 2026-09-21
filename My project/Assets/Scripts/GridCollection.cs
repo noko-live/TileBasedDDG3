@@ -1,6 +1,4 @@
 using UnityEngine;
-using NUnit;
-using NUnit.Framework.Constraints;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
@@ -21,6 +19,10 @@ public class GridCollection : MonoBehaviour
     [SerializeField] GameObject MapGridParent;
     [SerializeField] GameObject ItemHeldParent;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
